@@ -16,7 +16,7 @@ export function AppHeader() {
   )?.path
 
   return (
-    <header className="border-b border-border bg-background">
+    <header className="sticky top-0 z-30 border-b border-border bg-background">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center px-6">
         <NavLink to="/admin" className="flex items-baseline gap-2">
           <span className="text-lg font-semibold tracking-tight text-foreground">

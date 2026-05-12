@@ -224,7 +224,7 @@ function TaskHeader({
   secondsElapsed: number
 }) {
   return (
-    <div className="sticky top-14 z-10 border-b border-border bg-background/95 backdrop-blur">
+    <div className="sticky top-14 z-20 border-b border-border bg-background shadow-sm">
       <div className="mx-auto flex w-full max-w-3xl flex-wrap items-center gap-4 px-6 py-3">
         <div className="min-w-0 flex-1">
           <div className="truncate text-sm font-medium text-foreground">
