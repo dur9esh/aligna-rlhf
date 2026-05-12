@@ -7,6 +7,8 @@ import {
   Settings,
   type LucideIcon,
 } from 'lucide-react'
+import { toast } from 'sonner'
+import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
 type Item = {
@@ -47,14 +49,23 @@ export function AdminSidebar() {
           const Icon = item.icon
           if (!item.enabled) {
             return (
-              <span
+              <button
                 key={item.label}
-                aria-disabled="true"
-                className="flex cursor-not-allowed items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground/70"
+                type="button"
+                onClick={() =>
+                  toast(`${item.label} is in the V2 roadmap.`)
+                }
+                className="flex items-center gap-2.5 rounded-md px-3 py-2 text-left text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Icon className="h-4 w-4" />
-                {item.label}
-              </span>
+                <span className="flex-1">{item.label}</span>
+                <Badge
+                  variant="muted"
+                  className="px-1.5 py-0 text-[10px] font-medium"
+                >
+                  Soon
+                </Badge>
+              </button>
             )
           }
           return (
