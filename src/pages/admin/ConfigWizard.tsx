@@ -228,7 +228,7 @@ function Stepper({ steps }: { steps: StepDef[] }) {
   return (
     <nav
       aria-label="Configuration steps"
-      className="sticky top-14 z-10 -mx-2 overflow-x-auto rounded-lg border border-border bg-background/95 px-2 py-2 backdrop-blur"
+      className="sticky top-14 z-20 -mx-2 overflow-x-auto rounded-lg border border-border bg-background px-2 py-2 shadow-sm"
     >
       <ol className="flex items-center gap-1">
         {steps.map((step, index) => (
