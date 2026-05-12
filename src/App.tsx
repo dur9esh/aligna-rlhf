@@ -4,7 +4,8 @@ import { AdminLayout } from '@/components/layout/AdminLayout'
 import { ConfigWizard } from '@/pages/admin/ConfigWizard'
 import { ProjectList } from '@/pages/admin/ProjectList'
 import { ProjectDashboard } from '@/pages/admin/ProjectDashboard'
-import { AnnotatorHome } from '@/pages/annotator/AnnotatorHome'
+import { AnnotationTask } from '@/pages/annotator/AnnotationTask'
+import { TaskQueue } from '@/pages/annotator/TaskQueue'
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Route path="projects/:id" element={<ProjectDashboard />} />
           <Route path="projects/:id/configure" element={<ConfigWizard />} />
         </Route>
-        <Route path="/annotate" element={<AnnotatorHome />} />
+        <Route path="/annotate" element={<TaskQueue />} />
+        <Route path="/annotate/task/:taskId" element={<AnnotationTask />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Route>
     </Routes>

@@ -1,4 +1,10 @@
-import { createContext, useContext, useMemo, type ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react'
 import { seed } from '@/data/seed'
 import type { Annotation, Annotator, Project, Task } from '@/types'
 
@@ -8,20 +14,26 @@ type AppContextValue = {
   annotators: Annotator[]
   annotations: Annotation[]
   currentAnnotatorId: string
+  setCurrentAnnotatorId: (id: string) => void
 }
 
 const AppContext = createContext<AppContextValue | null>(null)
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const [currentAnnotatorId, setCurrentAnnotatorId] = useState<string>(
+    seed.annotators[0].id,
+  )
+
   const value = useMemo<AppContextValue>(
     () => ({
       projects: seed.projects,
       tasks: seed.tasks,
       annotators: seed.annotators,
       annotations: seed.annotations,
-      currentAnnotatorId: seed.annotators[0].id,
+      currentAnnotatorId,
+      setCurrentAnnotatorId,
     }),
-    [],
+    [currentAnnotatorId],
   )
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
@@ -48,6 +60,11 @@ export function useTasksByProject(projectId: string) {
   return tasks.filter((t) => t.projectId === projectId)
 }
 
+export function useTask(taskId: string | undefined) {
+  const { tasks } = useAppContext()
+  return tasks.find((t) => t.id === taskId)
+}
+
 export function useAnnotators() {
   return useAppContext().annotators
 }
@@ -64,4 +81,8 @@ export function useCurrentAnnotator() {
     throw new Error('Current annotator not found in annotator pool')
   }
   return found
+}
+
+export function useSetCurrentAnnotator() {
+  return useAppContext().setCurrentAnnotatorId
 }
