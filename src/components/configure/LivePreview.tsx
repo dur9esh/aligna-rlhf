@@ -141,7 +141,7 @@ function PreviewBody({
     const t = window.setTimeout(() => {
       setFadeKey(activeKind)
       setVisible(true)
-    }, 120)
+    }, 200)
     return () => window.clearTimeout(t)
   }, [activeKind, fadeKey])
 

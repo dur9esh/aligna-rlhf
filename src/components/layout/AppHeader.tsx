@@ -22,7 +22,7 @@ export function AppHeader() {
           <span className="text-lg font-semibold tracking-tight text-foreground">
             Aligna
           </span>
-          <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+          <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-muted-foreground">
             v0.1 prototype
           </span>
         </NavLink>

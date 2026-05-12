@@ -61,12 +61,12 @@ export function MethodologyStep({
               }
             }}
             className={cn(
-              'group relative flex h-full flex-col rounded-lg border bg-card p-4 text-left transition-colors',
+              'group relative flex h-full flex-col rounded-lg border bg-card p-4 text-left transition-all',
               option.disabled
                 ? 'cursor-not-allowed border-border opacity-70'
                 : isSelected
-                  ? 'border-primary ring-2 ring-primary/30'
-                  : 'border-border hover:border-foreground/30 hover:bg-muted/40',
+                  ? 'border-primary shadow-sm ring-2 ring-primary/30'
+                  : 'border-border hover:border-foreground/30 hover:bg-muted/40 hover:shadow-sm',
             )}
             aria-pressed={!option.disabled ? isSelected : undefined}
           >

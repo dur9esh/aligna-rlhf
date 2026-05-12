@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { ChevronRight, Plus } from 'lucide-react'
+import { ChevronRight, FolderPlus, Plus } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { EmptyState } from '@/components/ui/empty-state'
 import { Progress } from '@/components/ui/progress'
 import {
   Table,
@@ -50,30 +51,40 @@ export function ProjectList() {
         </Button>
       </div>
 
-      <div className="mt-8 rounded-lg border border-border bg-card">
-        <Table>
-          <TableHeader>
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="w-[28%]">Name</TableHead>
-              <TableHead>Methodology</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="w-[22%]">Progress</TableHead>
-              <TableHead className="text-right">Annotators</TableHead>
-              <TableHead className="text-right">Quality</TableHead>
-              <TableHead className="w-8" aria-label="" />
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {projects.map((project) => (
-              <ProjectRow
-                key={project.id}
-                project={project}
-                onOpen={() => navigate(`/admin/projects/${project.id}`)}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      {projects.length === 0 ? (
+        <div className="mt-8">
+          <EmptyState
+            icon={FolderPlus}
+            title="No projects yet"
+            description="Create your first annotation project to start collecting alignment data."
+          />
+        </div>
+      ) : (
+        <div className="mt-8 rounded-lg border border-border bg-card">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="w-[28%]">Name</TableHead>
+                <TableHead>Methodology</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="w-[22%]">Progress</TableHead>
+                <TableHead className="text-right">Annotators</TableHead>
+                <TableHead className="text-right">Quality</TableHead>
+                <TableHead className="w-8" aria-label="" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {projects.map((project) => (
+                <ProjectRow
+                  key={project.id}
+                  project={project}
+                  onOpen={() => navigate(`/admin/projects/${project.id}`)}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
     </div>
   )
 }

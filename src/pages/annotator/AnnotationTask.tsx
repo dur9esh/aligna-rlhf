@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ChevronDown, ChevronUp, Timer } from 'lucide-react'
 import { toast } from 'sonner'
@@ -147,12 +147,17 @@ export function AnnotationTask() {
         </div>
 
         <section className="mt-8">
-          <h2 className="text-sm font-semibold text-foreground">
-            Your rating
-          </h2>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            Choose the option that best reflects your judgment.
-          </p>
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <div>
+              <h2 className="text-sm font-semibold text-foreground">
+                Your rating
+              </h2>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Choose the option that best reflects your judgment.
+              </p>
+            </div>
+            <KeyboardHint />
+          </div>
           <div className="mt-4">
             <RatingWidget
               methodology={project.methodology}
@@ -192,15 +197,11 @@ export function AnnotationTask() {
           </label>
         </section>
 
-        <p className="mt-4 text-xs text-muted-foreground">
-          Tip: press 1, 2, 3, 4 to rate; Enter to submit.
-        </p>
-
-        <div className="mt-8 flex items-center justify-between">
-          <Button variant="ghost" size="sm" onClick={skip}>
+        <div className="mt-10 flex items-center justify-between gap-4">
+          <Button variant="ghost" onClick={skip}>
             Skip task
           </Button>
-          <Button size="lg" onClick={submit}>
+          <Button size="lg" className="px-8 shadow-sm" onClick={submit}>
             Submit &amp; next
           </Button>
         </div>
@@ -240,6 +241,27 @@ function TaskHeader({
       </div>
       <Progress value={progressPct} className="h-1 rounded-none" />
     </div>
+  )
+}
+
+function KeyboardHint() {
+  return (
+    <div className="hidden items-center gap-1.5 text-[11px] text-muted-foreground sm:flex">
+      <span>Press</span>
+      <Kbd>1</Kbd>
+      <Kbd>2</Kbd>
+      <Kbd>3</Kbd>
+      <Kbd>4</Kbd>
+      <span>to rate</span>
+    </div>
+  )
+}
+
+function Kbd({ children }: { children: ReactNode }) {
+  return (
+    <kbd className="inline-flex h-5 min-w-[1.25rem] items-center justify-center rounded border border-border bg-muted px-1 font-mono text-[10px] font-medium text-foreground">
+      {children}
+    </kbd>
   )
 }
 
