@@ -58,10 +58,10 @@ export function AnnotatorPoolStep({
               type="button"
               onClick={() => toggle(annotator.id)}
               className={cn(
-                'group relative flex items-start gap-3 rounded-lg border bg-card p-3 text-left transition-colors',
+                'group relative flex items-start gap-3 rounded-lg border bg-card p-3 text-left transition-all',
                 isSelected
-                  ? 'border-primary ring-2 ring-primary/30'
-                  : 'border-border hover:border-foreground/30 hover:bg-muted/30',
+                  ? 'border-primary shadow-sm ring-2 ring-primary/30'
+                  : 'border-border hover:border-foreground/30 hover:bg-muted/30 hover:shadow-sm',
               )}
               aria-pressed={isSelected}
             >

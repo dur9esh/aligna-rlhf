@@ -1,10 +1,11 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronDown, Sparkles } from 'lucide-react'
+import { ChevronDown, Inbox, Sparkles } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { EmptyState } from '@/components/ui/empty-state'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -139,9 +140,11 @@ export function TaskQueue() {
 function MyTasksList({ projects }: { projects: Project[] }) {
   if (projects.length === 0) {
     return (
-      <div className="rounded-lg border border-border bg-card p-8 text-center text-sm text-muted-foreground">
-        No active projects. Check back later.
-      </div>
+      <EmptyState
+        icon={Inbox}
+        title="No projects yet"
+        description="You aren't qualified for any active projects right now. Check back later or take a calibration quiz to widen your eligibility."
+      />
     )
   }
 
@@ -179,7 +182,7 @@ function ProjectRow({ project }: { project: Project }) {
   const nextTask = pending[0] ?? tasks[0]
 
   return (
-    <div className="flex flex-wrap items-start justify-between gap-4 rounded-lg border border-border bg-card p-4">
+    <div className="flex flex-wrap items-start justify-between gap-4 rounded-lg border border-border bg-card p-4 transition-shadow hover:shadow-sm">
       <div className="min-w-0 flex-1">
         <div className="text-sm font-medium text-foreground">{project.name}</div>
         <div className="text-xs text-muted-foreground">{project.customer}</div>

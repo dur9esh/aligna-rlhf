@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
@@ -32,6 +33,50 @@ const MARGIN_OPTIONS: {
 ]
 
 export function RatingWidget({
+  methodology,
+  value,
+  onChange,
+}: {
+  methodology: Methodology
+  value: AnnotationValue | null
+  onChange: (next: AnnotationValue) => void
+}) {
+  const [renderedMethodology, setRenderedMethodology] = useState(methodology)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    if (renderedMethodology.kind === methodology.kind) {
+      // Same kind — let internal state update without fading (e.g. criteria edits).
+      if (renderedMethodology !== methodology) {
+        setRenderedMethodology(methodology)
+      }
+      return
+    }
+    setVisible(false)
+    const t = window.setTimeout(() => {
+      setRenderedMethodology(methodology)
+      setVisible(true)
+    }, 200)
+    return () => window.clearTimeout(t)
+  }, [methodology, renderedMethodology])
+
+  return (
+    <div
+      className={cn(
+        'transition-opacity duration-200',
+        visible ? 'opacity-100' : 'opacity-0',
+      )}
+    >
+      <RatingWidgetBody
+        methodology={renderedMethodology}
+        value={value}
+        onChange={onChange}
+      />
+    </div>
+  )
+}
+
+function RatingWidgetBody({
   methodology,
   value,
   onChange,
